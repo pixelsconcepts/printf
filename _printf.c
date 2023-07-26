@@ -6,48 +6,48 @@
  * @...: elipses to show more variables
  * Return: Always 0
  */
+
 int _printf(const char *format, ...)
 {
 	int length = 0;
 	va_list list_args;
 
 	va_start(list_args, format);
+
 	while (*format != '\0')
 	{
-		if (*format == '%' && *format != '\0')
+		if (*format == '%')
 		{
 			format++;
 			if (*format == '%')
 			{
-				my_putchar('%');
-				length++;
+				print_percent(&length);
 			}
 			else if (*format == 'c')
 			{
-				int c = va_arg(list_args, int);
-
-				my_putchar(c);
-				length++;
+				print_char(list_args, &length);
 			}
 			else if (*format == 's')
 			{
-				char *s = va_arg(list_args, char*);
-
-				while (*s != '\0')
-				{
-					my_putchar(*s);
-					s++;
-					length++;
-				}
-
+				print_string(list_args, &length);
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				print_decimal(list_args, &length);
+			}
+			else
+			{
+				my_putchar('%');
+				my_putchar(*format);
+				length++;
 			}
 		}
 		else
 		{
 			my_putchar(*format);
 			length++;
-			format++;
 		}
+		format++;
 	}
 	va_end(list_args);
 	return (length);
