@@ -89,3 +89,10 @@ void print_decimal(va_list list_args, int *length)
 		(*length)++;
 	}
 }
+
+void print_xtra(char char_format, int *length)
+{
+	my_putchar('%');
+	my_putchar(char_format);
+	(*length)++;
+}
