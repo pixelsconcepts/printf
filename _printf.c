@@ -37,9 +37,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				my_putchar('%');
-				my_putchar(*format);
-				length++;
+				print_xtra(*format, &length);
 			}
 		}
 		else
